@@ -65,7 +65,9 @@ const HomeScreen = ({ navigation, route }) => {
   return (
     <ScrollView>
       <View style={{ backgroundColor: "white", padding: 10, borderRadius: 20 }}>
-        <HeaderTabs />
+        <HeaderTabs name="Delivery" />
+        <HeaderTabs name="Pick up" />
+
         {/* SearchBar */}
         <View
           style={{
