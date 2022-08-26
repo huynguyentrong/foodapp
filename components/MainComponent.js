@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
 import HomeScreen from "../screens/HomeScreen";
 import FoodDetailScreen from "../screens/FoodDetailScreen";
+import WelcomeScreen from "../screens/WelcomeScreen";
 
 function DetailsScreen({ route }) {
   return (
@@ -18,7 +19,7 @@ function DetailsScreen({ route }) {
 function ProfileStackScreen() {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="profile" component={Profile} />
+      <SettingsStack.Screen name="profile" component={WelcomeScreen} />
     </SettingsStack.Navigator>
   );
 }
