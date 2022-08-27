@@ -3,14 +3,12 @@ import { StyleSheet, Text, View } from "react-native";
 import { Provider } from "react-redux";
 import MainComponent from "./components/MainComponent";
 import { ConfigureStore } from "./redux/ConfigureStore";
-import WelcomeScreen from "./screens/WelcomeScreen";
 const store = ConfigureStore();
 
 export default function App() {
   return (
     <Provider store={store}>
-      {/* <MainComponent /> */}
-      <WelcomeScreen />
+      <MainComponent />
     </Provider>
   );
 }
