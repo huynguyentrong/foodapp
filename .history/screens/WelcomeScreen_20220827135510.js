@@ -13,7 +13,6 @@ import { Colors, Fonts, General } from "../contants/";
 import Display from "../utils/Display";
 import { useDispatch } from "react-redux";
 import GeneralAction from "../actions/GeneralAction";
-import StorageService from "../services/StorageService";
 const pageStyle = (isActive) =>
   isActive
     ? styles.page

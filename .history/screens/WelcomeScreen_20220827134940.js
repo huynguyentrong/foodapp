@@ -11,28 +11,15 @@ import WelcomeCard from "../components/WelcomeCard";
 import Separator from "../components/Separator";
 import { Colors, Fonts, General } from "../contants/";
 import Display from "../utils/Display";
-import { useDispatch } from "react-redux";
-import GeneralAction from "../actions/GeneralAction";
-import StorageService from "../services/StorageService";
-const pageStyle = (isActive) =>
-  isActive
-    ? styles.page
-    : { ...styles.page, backgroundColor: Colors.DEFAULT_GREY };
-
-const Pagination = ({ index }) => {
+const Paginations = () => {
   return (
     <View style={styles.pageContainer}>
-      {[...Array(General.WELCOME_CONTENTS.length).keys()].map((_, i) =>
-        i === index ? (
-          <View style={pageStyle(true)} key={i} />
-        ) : (
-          <View style={pageStyle(false)} key={i} />
-        )
-      )}
+      <View style={styles.page} />
+      <View style={styles.page} />
+      <View style={styles.page} />
     </View>
   );
 };
-
 const WelcomeScreen = ({ navigation }) => {
   const [welcomeListIndex, setWelcomeListIndex] = useState(0);
   const welcomeList = useRef();
@@ -40,7 +27,6 @@ const WelcomeScreen = ({ navigation }) => {
     setWelcomeListIndex(changed[0].index);
   });
   const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 50 });
-
   const pageScroll = () => {
     welcomeList.current.scrollToIndex({
       index: welcomeListIndex < 2 ? welcomeListIndex + 1 : welcomeListIndex,
@@ -53,16 +39,12 @@ const WelcomeScreen = ({ navigation }) => {
       dispatch(GeneralAction.setIsFirstTimeUse());
     });
   };
-
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor={Colors.DEFAULT_WHITE}
-        translucent
-      />
+      <StatusBar barStyle="dark-content" backgroundColor="white" translucent />
       <Separator height={StatusBar.currentHeight} />
       <Separator height={Display.setHeight(8)} />
+
       <View style={styles.welcomeListContainer}>
         <FlatList
           ref={welcomeList}
@@ -77,35 +59,17 @@ const WelcomeScreen = ({ navigation }) => {
           renderItem={({ item }) => <WelcomeCard {...item} />}
         />
       </View>
-      <Separator height={Display.setHeight(8)} />
-      <Pagination index={welcomeListIndex} />
-      <Separator height={Display.setHeight(8)} />
-      {welcomeListIndex === 2 ? (
-        <TouchableOpacity
-          style={styles.gettingStartedButton}
-          activeOpacity={0.8}
-          onPress={() => navigate()}
-        >
-          <Text style={styles.gettingStartedButtonText}>Get Started</Text>
+      <Separator height={StatusBar.currentHeight} />
+      <Paginations />
+      <Separator height={StatusBar.currentHeight} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity activeOpacity={0.8} style={{ marginLeft: 10 }}>
+          <Text style={styles.buttonText}>SKIP</Text>
         </TouchableOpacity>
-      ) : (
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={{ marginLeft: 10 }}
-            onPress={() => welcomeList.current.scrollToEnd()}
-          >
-            <Text style={styles.buttonText}>SKIP</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            activeOpacity={0.8}
-            onPress={() => pageScroll()}
-          >
-            <Text style={styles.buttonText}>NEXT</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+        <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+          <Text style={styles.buttonText}>NEXT</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -114,13 +78,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: Colors.DEFAULT_WHITE,
-  },
-  welcomeListContainer: {
-    height: Display.setHeight(60),
+    backgroundColor: "white",
   },
   pageContainer: {
     flexDirection: "row",
+  },
+  welcomeListContainer: {
+    height: Display.setHeight(60),
   },
   page: {
     height: 8,
@@ -145,21 +109,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 11,
     borderRadius: 32,
-  },
-  gettingStartedButton: {
-    backgroundColor: Colors.DEFAULT_GREEN,
-    paddingVertical: 5,
-    paddingHorizontal: 40,
-    borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
-    elevation: 2,
-  },
-  gettingStartedButtonText: {
-    fontSize: 20,
-    color: Colors.DEFAULT_WHITE,
-    lineHeight: 20 * 1.4,
-    fontFamily: Fonts.POPPINS_MEDIUM,
   },
 });
 
