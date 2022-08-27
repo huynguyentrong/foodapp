@@ -5,7 +5,7 @@ import Display from "../utils/Display";
 const WelcomeCard = ({ title, content, image }) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={Images[image]} resizeMode="contain" />
+      <Image style={styles.image} source={Images[image] resizeMode="containts"} />
       <Text style={styles.titleText}>{title}</Text>
       <Text style={styles.contentText}>{content}</Text>
     </View>

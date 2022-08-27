@@ -5,7 +5,7 @@ import Display from "../utils/Display";
 const WelcomeCard = ({ title, content, image }) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={Images[image]} resizeMode="contain" />
+      <Image style={styles.image} />
       <Text style={styles.titleText}>{title}</Text>
       <Text style={styles.contentText}>{content}</Text>
     </View>
@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: Display.setWidth(100),
   },
   image: {
     height: Display.setHeight(30),
@@ -30,8 +29,6 @@ const styles = StyleSheet.create({
   contentText: {
     fontSize: 18,
     fontFamily: Fonts.POPPINS_EXTRA_LIGHT,
-    textAlign: "center",
-    marginHorizontal: 20,
   },
 });
 
